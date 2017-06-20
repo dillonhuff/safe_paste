@@ -54,16 +54,25 @@
       (interactive "sWhat word do you want to highlight? ")
       (message "Highlighting %s!" str-to-highlight)
 
-      (font-lock-add-keywords 'emacs-lisp-mode
-			      '(("word" . 'my-highlight)))
+      (font-lock-add-keywords nil
+			      '(("mode" . 'my-highlight)) 'append)
 
       (font-lock-fontify-buffer)
       
       (message "Highlighting again %s!" str-to-highlight)
       )
 
+(defun highlight-word (word)
+  (font-lock-add-keywords nil '((word . 'my-highlight)) 'append)
+  (font-lock-fontify-buffer))
 
-(font-lock-add-keywords nil '(("three" . 'my-highlight)) 'append)
+(highlight-word "hello")
+
+hello
+
+
+(font-lock-add-keywords nil '(("lock" . 'my-highlight)) 'append)
+(font-lock-fontify-buffer)
 
 (defun my-font-lock-restart ()
   (interactive)
