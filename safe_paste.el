@@ -42,4 +42,31 @@
       '(text-mode latex-mode html-mode emacs-lisp-mode
         texinfo-mode))
 
-(defun dummy () 'foo)
+(defvar safe-paste-regions nil)
+(make-variable-buffer-local 'safe-paste-regions)
+
+(defun add-keyword (word)
+  (interactive)
+  )
+
+(defun highlight (str-to-highlight)
+      "Say hello to SOMEONE via M-x hello."
+      (interactive "sWhat word do you want to highlight? ")
+      (message "Highlighting %s!" str-to-highlight)
+
+      (font-lock-add-keywords 'emacs-lisp-mode
+			      '(("word" . 'my-highlight)))
+
+      (font-lock-fontify-buffer)
+      
+      (message "Highlighting again %s!" str-to-highlight)
+      )
+
+
+(font-lock-add-keywords nil '(("three" . 'my-highlight)) 'append)
+
+(defun my-font-lock-restart ()
+  (interactive)
+  (setq font-lock-mode-major-mode nil)
+  (font-lock-fontify-buffer))
+
