@@ -9,7 +9,10 @@
 (defun my-yank ()
   "Copy in car kill ring"
   (interactive)
-  (insert (car kill-ring-yank-pointer)))
+  (let ((old-point (point))) 
+    (insert (car kill-ring-yank-pointer))
+    (message "initial point = %i, final point = %i" old-point (point))
+  ))
 
 (defface my-highlight
        '((((class color) (min-colors 88) (background light))
@@ -26,30 +29,30 @@
        "Basic face for highlighting."
        :group 'basic-faces)
 
-(font-lock-add-keywords 'emacs-lisp-mode
-			'(("foo" . 'my-highlight)))
+;; (font-lock-add-keywords 'emacs-lisp-mode
+;; 			'(("foo" . 'my-highlight)))
 
-(font-lock-add-keywords 'emacs-lisp-mode
-			'(("lock" . 'my-highlight)))
+;; (font-lock-add-keywords 'emacs-lisp-mode
+;; 			'(("lock" . 'my-highlight)))
 
-(font-lock-add-keywords 'emacs-lisp-mode
-			'(("my" . 'my-highlight)))
+;; (font-lock-add-keywords 'emacs-lisp-mode
+;; 			'(("my" . 'my-highlight)))
 
-(font-lock-add-keywords 'emacs-lisp-mode
-			'(("local" . 'my-highlight)))
+;; (font-lock-add-keywords 'emacs-lisp-mode
+;; 			'(("local" . 'my-highlight)))
 
 ;; agressive whitespace marking.
 (defface extra-whitespace-face
   '((t (:background "pale green")))
   "Used in text-mode and friends for exactly one space after a period.")
 
-(mapc (lambda (mode)
-        (font-lock-add-keywords
-         mode
-         '(("hello" 0 'show-paren-mismatch-face)
-           ("\\.\\( \\)\\b" 1 'my-highlight))))
-      '(text-mode latex-mode html-mode emacs-lisp-mode
-        texinfo-mode))
+;; (mapc (lambda (mode)
+;;         (font-lock-add-keywords
+;;          mode
+;;          '(("hello" 0 'show-paren-mismatch-face)
+;;            ("\\.\\( \\)\\b" 1 'my-highlight))))
+;;       '(text-mode latex-mode html-mode emacs-lisp-mode
+;;         texinfo-mode))
 
 (defvar safe-paste-regions nil)
 (make-variable-buffer-local 'safe-paste-regions)
@@ -113,4 +116,9 @@
 ;; (defun word-test-2 ()
 ;;   '(("string" . 'my-highlight)))
 ;; (message (word-test-2))
+;; (message (word-test-2));; (message (word-test-2));; (message (word-test-2))
+;; (message (word-test-2));; (message (word-test-2));; (message (word-test-2))
+;; (message (word-test-2));; (message (word-test-2));; (message (word-test-2))
+
+
 

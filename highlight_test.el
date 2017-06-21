@@ -38,8 +38,10 @@
 
 (highlight-symbol-add-symbol-with-face "font" 'my-highlight)
 (highlight-symbol-add-symbol-with-face "nil" 'my-highlight)
+(highlight-symbol-add-symbol-with-face "symbol" 'my-highlight)
 
 (highlight-symbol-remove-symbol "nil")
 (highlight-symbol-remove-symbol "font")
-
-(length nil)
+(highlight-symbol-remove-symbol "my")
+(highlight-symbol-remove-symbol "lock")
+(highlight-symbol-remove-symbol "symbol")
