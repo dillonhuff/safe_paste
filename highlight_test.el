@@ -39,6 +39,7 @@
 (highlight-symbol-add-symbol-with-face "font" 'my-highlight)
 (highlight-symbol-add-symbol-with-face "nil" 'my-highlight)
 
-
 (highlight-symbol-remove-symbol "nil")
 (highlight-symbol-remove-symbol "font")
+
+(length nil)
