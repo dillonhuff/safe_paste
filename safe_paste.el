@@ -6,12 +6,16 @@
   (push-mark)
   (goto-char (point-min)))
 
+(defvar safe-paste-highlight-ranges nil)
+(make-variable-buffer-local 'safe-paste-highlight-ranges)
+
 (defun my-yank ()
   "Copy in car kill ring"
   (interactive)
   (let ((old-point (point))) 
     (insert (car kill-ring-yank-pointer))
     (message "initial point = %i, final point = %i" old-point (point))
+    (push `(,old-point ,(point)) safe-paste-highlight-ranges)
   ))
 
 (defface my-highlight
@@ -79,12 +83,12 @@
 
 ;; (highlight-word "hello")
 
-(font-lock-add-keywords nil '(("lock" . 'my-highlight)) 'append)
-(font-lock-add-keywords nil '(("nil" . 'my-highlight)) 'append)
-(font-lock-add-keywords nil '(("cube" . 'my-highlight)) 'append)
-(font-lock-add-keywords nil '(("append" . 'my-highlight)) 'append)
-(font-lock-add-keywords nil '(("mode" . 'my-highlight)) 'append)
-(font-lock-fontify-buffer)
+;; (font-lock-add-keywords nil '(("lock" . 'my-highlight)) 'append)
+;; (font-lock-add-keywords nil '(("nil" . 'my-highlight)) 'append)
+;; (font-lock-add-keywords nil '(("cube" . 'my-highlight)) 'append)
+;; (font-lock-add-keywords nil '(("append" . 'my-highlight)) 'append)
+;; (font-lock-add-keywords nil '(("mode" . 'my-highlight)) 'append)
+;; (font-lock-fontify-buffer)
 
 (defun highlight-word nil
   (font-lock-add-keywords nil '(("buffer" . 'my-highlight)) 'append)
@@ -99,7 +103,7 @@
 
 ;;(highlight-word)
 
-(highlight-word-str "major")
+;;(highlight-word-str "major")
 
 (defun let-major-l () 'major)
 ;; (defun my-font-lock-restart ()
