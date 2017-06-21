@@ -29,6 +29,15 @@
 (font-lock-add-keywords 'emacs-lisp-mode
 			'(("foo" . 'my-highlight)))
 
+(font-lock-add-keywords 'emacs-lisp-mode
+			'(("lock" . 'my-highlight)))
+
+(font-lock-add-keywords 'emacs-lisp-mode
+			'(("my" . 'my-highlight)))
+
+(font-lock-add-keywords 'emacs-lisp-mode
+			'(("local" . 'my-highlight)))
+
 ;; agressive whitespace marking.
 (defface extra-whitespace-face
   '((t (:background "pale green")))
@@ -45,37 +54,63 @@
 (defvar safe-paste-regions nil)
 (make-variable-buffer-local 'safe-paste-regions)
 
-(defun add-keyword (word)
-  (interactive)
-  )
+;; (defun add-keyword (word)
+;;   (interactive)
+;;   )
+;; (defun highlight (str-to-highlight)
+;;       "Say hello to SOMEONE via M-x hello."
+;;       (interactive "sWhat word do you want to highlight? ")
+;;       (message "Highlighting %s!" str-to-highlight)
 
-(defun highlight (str-to-highlight)
-      "Say hello to SOMEONE via M-x hello."
-      (interactive "sWhat word do you want to highlight? ")
-      (message "Highlighting %s!" str-to-highlight)
+;;       (font-lock-add-keywords nil
+;; 			      '(("mode" . 'my-highlight)) 'append)
 
-      (font-lock-add-keywords nil
-			      '(("mode" . 'my-highlight)) 'append)
-
-      (font-lock-fontify-buffer)
+;;       (font-lock-fontify-buffer)
       
-      (message "Highlighting again %s!" str-to-highlight)
-      )
+;;       (message "Highlighting again %s!" str-to-highlight)
+;;       )
 
-(defun highlight-word (word)
-  (font-lock-add-keywords nil '((word . 'my-highlight)) 'append)
-  (font-lock-fontify-buffer))
+;; (defun highlight-word (word)
+;;   (font-lock-add-keywords nil '((word . 'my-highlight)) 'append)
+;;   (font-lock-fontify-buffer))
 
-(highlight-word "hello")
-
-hello
-
+;; (highlight-word "hello")
 
 (font-lock-add-keywords nil '(("lock" . 'my-highlight)) 'append)
+(font-lock-add-keywords nil '(("nil" . 'my-highlight)) 'append)
+(font-lock-add-keywords nil '(("cube" . 'my-highlight)) 'append)
+(font-lock-add-keywords nil '(("append" . 'my-highlight)) 'append)
+(font-lock-add-keywords nil '(("mode" . 'my-highlight)) 'append)
 (font-lock-fontify-buffer)
 
-(defun my-font-lock-restart ()
-  (interactive)
-  (setq font-lock-mode-major-mode nil)
+(defun highlight-word nil
+  (font-lock-add-keywords nil '(("buffer" . 'my-highlight)) 'append)
   (font-lock-fontify-buffer))
+
+
+;; This function call does not work, but the above call, highlight-word
+;; does work. Maybe somehow arg is not actually being evaluated inside the string?
+(defun highlight-word-str (arg)
+  (font-lock-add-keywords nil `((,arg . my-highlight)) 'append)
+  (font-lock-fontify-buffer))
+
+;;(highlight-word)
+
+(highlight-word-str "major")
+
+(defun let-major-l () 'major)
+;; (defun my-font-lock-restart ()
+;;   (interactive)
+;;   (setq font-lock-mode-major-mode nil)
+;;   (font-lock-fontify-buffer))
+
+;;(my-font-lock-restart)
+
+;; (defun word-test (arg)
+;;   `((,arg . 'my-highlight)))
+;; (message (word-test "hello"))
+
+;; (defun word-test-2 ()
+;;   '(("string" . 'my-highlight)))
+;; (message (word-test-2))
 
